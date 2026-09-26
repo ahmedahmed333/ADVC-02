@@ -106,42 +106,72 @@
 
             #region Task 03 3.2. Transform Products 
 
-            static List<string> TransformProducts(List<Product> products, Func<Product, string> function)
-            {
-                List<string> res = new List<string>();
+            //static List<string> TransformProducts(List<Product> products, Func<Product, string> function)
+            //{
+            //    List<string> res = new List<string>();
 
-                foreach (Product product in products)
-                {
-                    res.Add(function(product));
-                }
-                return res;
-
-
-            }
-
-            List<string> priceLabel = TransformProducts(products, product => product.Price > 100 ? "Expensive!" : "Affordable");
+            //    foreach (Product product in products)
+            //    {
+            //        res.Add(function(product));
+            //    }
+            //    return res;
 
 
-            Console.WriteLine("\n--- Summary List ---");
+            //}
 
-            List<string> summary = TransformProducts(products, product => $"{product.Name} (${product.Price})");
-
-            foreach (string item in summary)
-            {
-                Console.WriteLine(item);
-            }
+            //List<string> priceLabel = TransformProducts(products, product => product.Price > 100 ? "Expensive!" : "Affordable");
 
 
-            Console.WriteLine("--- Price Labels ---");
+            //Console.WriteLine("\n--- Summary List ---");
 
-            for (int i = 0; i < products.Count; i++)
-            {
-                Console.WriteLine($"{products[i].Name}: {priceLabel[i]}");
-            }
+            //List<string> summary = TransformProducts(products, product => $"{product.Name} (${product.Price})");
+
+            //foreach (string item in summary)
+            //{
+            //    Console.WriteLine(item);
+            //}
+
+
+            //Console.WriteLine("--- Price Labels ---");
+
+            //for (int i = 0; i < products.Count; i++)
+            //{
+            //    Console.WriteLine($"{products[i].Name}: {priceLabel[i]}");
+            //}
             #endregion
 
 
+            #region Task 03 3.3. Filter Products 
 
+
+            static List<Product> FilterProducts(List<Product> products, Predicate<Product> condition)
+            {
+                List<Product> res = new List<Product>();
+
+                foreach (Product product in products)
+                {
+
+                    if (condition(product))
+                    {
+
+                        res.Add(product);
+                    }
+
+
+                }
+                return res;
+
+            }
+            List<Product> lowStock = FilterProducts(products, product => product.Stock < 20);
+            Console.WriteLine("\n--- Low-Stock Alert ---");
+
+
+            foreach (Product prod in lowStock)
+            {
+                Console.WriteLine($"[LOW STOCK] {prod.Name}: only {prod.Stock} left!");
+            }
+
+            #endregion
 
         }
 
