@@ -45,42 +45,64 @@
 
 
 
-            Console.WriteLine("--- Electronics ---");
+     //       Console.WriteLine("--- Electronics ---");
 
-            foreach (Product product in elec)
-            {
-                Console.WriteLine(
-     $"{product.Name} - ${product.Price} (Stock: {product.Stock})");
-            }
-
-
-            Console.WriteLine("--- Under $50 ---");
-
-            foreach (Product product in price)
-            {
-                Console.WriteLine(
-                    $"{product.Name} - ${product.Price} (Stock: {product.Stock})");
-            }
-
-            Console.WriteLine("--- In Stock ---");
-
-            foreach (Product product in stock)
-            {
-                Console.WriteLine(
-                    $"{product.Name} - ${product.Price} (Stock: {product.Stock})");
-            }
+     //       foreach (Product product in elec)
+     //       {
+     //           Console.WriteLine(
+     //$"{product.Name} - ${product.Price} (Stock: {product.Stock})");
+     //       }
 
 
-            Console.WriteLine("--- Clothing Under $100 ---");
+     //       Console.WriteLine("--- Under $50 ---");
 
-            foreach (Product product in Category)
-            {
-                Console.WriteLine(
-                    $"{product.Name} - ${product.Price} (Stock: {product.Stock})");
-            }
+     //       foreach (Product product in price)
+     //       {
+     //           Console.WriteLine(
+     //               $"{product.Name} - ${product.Price} (Stock: {product.Stock})");
+     //       }
+
+     //       Console.WriteLine("--- In Stock ---");
+
+     //       foreach (Product product in stock)
+     //       {
+     //           Console.WriteLine(
+     //               $"{product.Name} - ${product.Price} (Stock: {product.Stock})");
+     //       }
+
+
+     //       Console.WriteLine("--- Clothing Under $100 ---");
+
+     //       foreach (Product product in Category)
+     //       {
+     //           Console.WriteLine(
+     //               $"{product.Name} - ${product.Price} (Stock: {product.Stock})");
+     //       }
             #endregion
 
+            #region Task 03 3.1  Print Reports 
+            static void PrintReport(List<Product> products, Action<Product> action)
+            {
+                foreach (Product product in products)
+                {
+                    action(product);
+                }
+            }
 
+            Console.WriteLine("--- Short Report ---");
+
+            PrintReport(products, product => { Console.WriteLine($"{product.Name} - ${product.Price}"); });
+
+            Console.WriteLine("--- Detailed Report ---");
+
+            PrintReport(products, product =>
+            {
+                Console.WriteLine(
+                    $"[{product.Category}] {product.Name} | Price: ${product.Price} | Stock: {product.Stock}"
+                );
+            });
+
+            #endregion
         }
     }
 }
