@@ -45,64 +45,106 @@
 
 
 
-     //       Console.WriteLine("--- Electronics ---");
+            //       Console.WriteLine("--- Electronics ---");
 
-     //       foreach (Product product in elec)
-     //       {
-     //           Console.WriteLine(
-     //$"{product.Name} - ${product.Price} (Stock: {product.Stock})");
-     //       }
-
-
-     //       Console.WriteLine("--- Under $50 ---");
-
-     //       foreach (Product product in price)
-     //       {
-     //           Console.WriteLine(
-     //               $"{product.Name} - ${product.Price} (Stock: {product.Stock})");
-     //       }
-
-     //       Console.WriteLine("--- In Stock ---");
-
-     //       foreach (Product product in stock)
-     //       {
-     //           Console.WriteLine(
-     //               $"{product.Name} - ${product.Price} (Stock: {product.Stock})");
-     //       }
+            //       foreach (Product product in elec)
+            //       {
+            //           Console.WriteLine(
+            //$"{product.Name} - ${product.Price} (Stock: {product.Stock})");
+            //       }
 
 
-     //       Console.WriteLine("--- Clothing Under $100 ---");
+            //       Console.WriteLine("--- Under $50 ---");
 
-     //       foreach (Product product in Category)
-     //       {
-     //           Console.WriteLine(
-     //               $"{product.Name} - ${product.Price} (Stock: {product.Stock})");
-     //       }
+            //       foreach (Product product in price)
+            //       {
+            //           Console.WriteLine(
+            //               $"{product.Name} - ${product.Price} (Stock: {product.Stock})");
+            //       }
+
+            //       Console.WriteLine("--- In Stock ---");
+
+            //       foreach (Product product in stock)
+            //       {
+            //           Console.WriteLine(
+            //               $"{product.Name} - ${product.Price} (Stock: {product.Stock})");
+            //       }
+
+
+            //       Console.WriteLine("--- Clothing Under $100 ---");
+
+            //       foreach (Product product in Category)
+            //       {
+            //           Console.WriteLine(
+            //               $"{product.Name} - ${product.Price} (Stock: {product.Stock})");
+            //       }
             #endregion
 
             #region Task 03 3.1  Print Reports 
-            static void PrintReport(List<Product> products, Action<Product> action)
-            {
-                foreach (Product product in products)
-                {
-                    action(product);
-                }
-            }
+            //static void PrintReport(List<Product> products, Action<Product> action)
+            //{
+            //    foreach (Product product in products)
+            //    {
+            //        action(product);
+            //    }
+            //}
 
-            Console.WriteLine("--- Short Report ---");
+            //Console.WriteLine("--- Short Report ---");
 
-            PrintReport(products, product => { Console.WriteLine($"{product.Name} - ${product.Price}"); });
+            //PrintReport(products, product => { Console.WriteLine($"{product.Name} - ${product.Price}"); });
 
-            Console.WriteLine("--- Detailed Report ---");
+            //Console.WriteLine("--- Detailed Report ---");
 
-            PrintReport(products, product =>
-            {
-                Console.WriteLine(
-                    $"[{product.Category}] {product.Name} | Price: ${product.Price} | Stock: {product.Stock}"
-                );
-            });
+            //PrintReport(products, product =>
+            //{
+            //    Console.WriteLine(
+            //        $"[{product.Category}] {product.Name} | Price: ${product.Price} | Stock: {product.Stock}"
+            //    );
+            //});
 
             #endregion
+
+            #region Task 03 3.2. Transform Products 
+
+            static List<string> TransformProducts(List<Product> products, Func<Product, string> function)
+            {
+                List<string> res = new List<string>();
+
+                foreach (Product product in products)
+                {
+                    res.Add(function(product));
+                }
+                return res;
+
+
+            }
+
+            List<string> priceLabel = TransformProducts(products, product => product.Price > 100 ? "Expensive!" : "Affordable");
+
+
+            Console.WriteLine("\n--- Summary List ---");
+
+            List<string> summary = TransformProducts(products, product => $"{product.Name} (${product.Price})");
+
+            foreach (string item in summary)
+            {
+                Console.WriteLine(item);
+            }
+
+
+            Console.WriteLine("--- Price Labels ---");
+
+            for (int i = 0; i < products.Count; i++)
+            {
+                Console.WriteLine($"{products[i].Name}: {priceLabel[i]}");
+            }
+            #endregion
+
+
+
+
         }
+
+
     }
 }
